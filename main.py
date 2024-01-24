@@ -22,10 +22,31 @@ print(f"\nyour number: '{number_inp}' raised to the power: '{number_exp_inp}' = 
 
 
 def stars(number_of_stars):
-    if number_of_stars <= 1:
-        return "*"
+    if number_of_stars == 0:
+        return ""
 
-    return number_of_stars * "*"
+    print("*", end=" "), stars(number_of_stars - 1)
+    return ""
 
 
 print(stars(int(input("Enter a number of stars: "))))
+# IDK how to explain this by writing smth similar as in the lesson,but if in general:
+# if input number != 0 then the * is printed,end=" "- gives us ability to add str,(* )not column,in the next recursion
+# and start working function and the main recursive function calls itself, but with the parameter dynamically decreased
+# by 1 each time it is called and when the parameter value reaches 0 the function completes its action and returns ""
+
+# 3
+
+
+def span(a, b):
+    if a <= b:
+        if a == b:
+            return a
+        return a + span(a + 1, b)
+    elif a >= b:
+        return b + span(a, b + 1)
+
+
+a_inp = int(input("Enter first number: "))
+b_inp = int(input("Enter second number: "))
+print(f"sum of numbers between '{a_inp}' and '{b_inp}' (inclusive) = {span(a_inp, b_inp)}")
