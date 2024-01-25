@@ -2,6 +2,9 @@
 HW7
 Savchenko Kirill
 """
+import random
+import sys
+
 
 # 1
 
@@ -50,3 +53,30 @@ def span(a, b):
 a_inp = int(input("Enter first number: "))
 b_inp = int(input("Enter second number: "))
 print(f"sum of numbers between '{a_inp}' and '{b_inp}' (inclusive) = {span(a_inp, b_inp)}")
+
+# a = 1, b = 5
+# span(1, 5) -> 1 + span(2, 5) => 3
+# span(2, 5) -> 1 + span(3, 5) => 6
+# span(3, 5) -> 1 + span(4, 5) => 10
+# span(4, 5) -> 1 + span(5, 5) => 15
+# span(5, 5) => 1
+# writing functions is much easier than explaining them, hope wrote it true
+
+# 4
+
+
+def min_num_spam(len_span, start_index=0, min_sum=sys.maxsize, min_sum_index=None):
+    if start_index + 10 > len(len_span):
+        return min_sum_index
+    sum_actual = min(len_span[start_index: start_index + 10])
+
+    if min_sum > sum_actual:
+        min_sum = sum_actual
+        min_sum_index = start_index
+
+    return min_num_spam(len_span, start_index + 1, min_sum, min_sum_index)
+
+
+total_span = [random.randint(0, 100) for _ in range(100)]
+print(f"Total span: {total_span}")
+print(f"index from which the ten numbers with the minimum sum begin: {min_num_spam(total_span)}")
